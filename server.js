@@ -1,0 +1,19 @@
+const express = require('express');
+const app = express();
+const cors = require('cors');
+// We do this because the front end runs on 3000
+const PORT = process.env.PORT || 3001;
+// heroku gives a port that the app runs on so we set it equal to the environments process to ensure it deploys correctly
+
+// in package.json change the main to the server and add the nodemon script
+app.use(express.json());
+app.use(cors());
+const models = require('./models');
+
+
+
+
+
+app.listen(PORT, () => {
+    console.log(`app started on ${PORT}`)
+});
