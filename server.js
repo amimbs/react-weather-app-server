@@ -9,9 +9,26 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(cors());
 const models = require('./models');
+const user = require('./models/user')
+require ('dotenv').config();
+
+app.use(express.json());
+app.use(
+    cors({
+        origin: ["http://localhost:3000"],
+        methods: ["GET", "POST"],
+        credentials: true
+    })
+);
 
 
+// routers
 
+// const loginRouter = require('./routes/Login');
+// app.use('/login', loginRouter)
+
+const registerRouter = require('./routes/Users');
+app.use('/register', registerRouter)
 
 
 app.listen(PORT, () => {
