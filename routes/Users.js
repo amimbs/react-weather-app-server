@@ -6,8 +6,8 @@ const bcyrpt = require('bcrypt');
 const saltRounds = 10;
 
 router.post('/', (req, res) => {
-    const { firstName, lastName, email, username, password } = req.body;
-    if (!email || !password || !firstName || !lastName || !username) {
+    const { firstName, lastName, email, userName, password } = req.body;
+    if (!email || !password || !firstName || !lastName || !userName) {
         return res.status(400).json({ error: 'All fields are required' });
     };
 
@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            username: username,
+            userName: userName,
             password: hash
         }).then((user) => {
             return res.status(200).json({ success: true, user_id: user.id });
@@ -29,4 +29,19 @@ router.post('/', (req, res) => {
         });
     });
 });
+router.post('/login', async (req, res) => {
+    const { userName, password } = req.body;
+    const foundUser = await models.User.findOne({ where: { userName: userName }, raw: true });
+    if (!foundUser) {
+        return res.json({ errors: 'invalid username' });
+    };
+    bcyrpt.compare(password, foundUser.password, (err, match) => {
+        if (match) {
+            res.json({ success: true, user_id: foundUser.id })
+        } else {
+            res.json({ error: 'Incorrect Password' })
+        };
+    });
+});
+
 module.exports = router;

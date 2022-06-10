@@ -27,8 +27,8 @@ app.use(
 // const loginRouter = require('./routes/Login');
 // app.use('/login', loginRouter)
 
-const registerRouter = require('./routes/Users');
-app.use('/register', registerRouter)
+const usersRouter = require('./routes/Users.js');
+app.use('/register', usersRouter)
 
 
 app.listen(PORT, () => {
