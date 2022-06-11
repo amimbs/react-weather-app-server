@@ -7,7 +7,6 @@ const PORT = process.env.PORT || 3001;
 
 // in package.json change the main to the server and add the nodemon script
 app.use(express.json());
-app.use(cors());
 const models = require('./models');
 const user = require('./models/user')
 require ('dotenv').config();
