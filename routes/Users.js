@@ -32,16 +32,17 @@ router.post('/', (req, res) => {
 
 
 router.post('/login', async (req, res) => {
+    console.log('hello world')
     const { userName, password } = req.body;
     const foundUser = await models.User.findOne({ where: { userName: userName }, raw: true });
     if (!foundUser) {
-        return res.json({ errors: 'invalid username' });
+        return res.status(400).json({ error: 'invalid username' });
     };
     bcyrpt.compare(password, foundUser.password, (err, match) => {
         if (match) {
-            res.json({ success: true, user_id: foundUser.id })
+            res.status(200).json({ success: true, user_id: foundUser.id })
         } else {
-            res.json({ error: 'Incorrect Password' })
+            res.status(400).json({ error: 'Incorrect Password' })
         };
     });
 });
