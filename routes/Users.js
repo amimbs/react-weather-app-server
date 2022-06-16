@@ -4,6 +4,8 @@ const models = require('../models');
 const user = require('../models/user')
 const bcyrpt = require('bcrypt');
 const saltRounds = 10;
+const jwt = require('jsonwebtoken')
+const tokenSecret = process.env.JWT_SECRET;
 
 router.post('/', (req, res) => {
     const { firstName, lastName, email, userName, password } = req.body;
@@ -40,7 +42,17 @@ router.post('/login', async (req, res) => {
     };
     bcyrpt.compare(password, foundUser.password, (err, match) => {
         if (match) {
-            res.status(200).json({ success: true, user_id: foundUser.id })
+            const id = foundUser.id;
+            const token = jwt.sign({ id }, tokenSecret, {
+                expiresIn: 300,
+            });
+            let responseUser = {
+                username: foundUser.username,
+                firstName: foundUser.firstName,
+                email: foundUser.email,
+                id: foundUser.id
+            };
+            res.status(200).json({ auth: true, token: token, foundUser: responseUser })
         } else {
             res.status(400).json({ error: 'Incorrect Password' })
         };
