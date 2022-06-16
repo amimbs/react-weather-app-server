@@ -32,7 +32,6 @@ router.post('/', (req, res) => {
     });
 });
 
-
 router.post('/login', async (req, res) => {
     console.log('hello world')
     const { userName, password } = req.body;

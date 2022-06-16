@@ -10,7 +10,6 @@ app.use(express.json());
 const models = require('./models');
 const user = require('./models/user')
 require ('dotenv').config();
-const jwt = require('jsonwebtoken')
 
 app.use(express.json());
 app.use(
@@ -21,9 +20,7 @@ app.use(
     })
 );
 
-
 // routers
-
 const usersRouter = require('./routes/Users.js');
 app.use('/register', usersRouter)
 
