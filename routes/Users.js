@@ -24,9 +24,11 @@ router.post('/', (req, res) => {
             return res.status(200).json({ success: true, user_id: user.id });
         }).catch(e => {
             let errors = [];
-            e.errors.forEach(error => {
-                errors.push(error.message);
-            });
+            if (e.errors) {
+                e.errors.forEach(error => {
+                    errors.push(error.message);
+                });
+            }
             return res.status(400).json({ error: errors });
         });
     });
@@ -51,9 +53,9 @@ router.post('/login', async (req, res) => {
                 email: foundUser.email,
                 id: foundUser.id
             };
-            res.status(200).json({ auth: true, token: token, foundUser: responseUser })
+            res.status(200).json({ auth: true, token: token, foundUser: responseUser });
         } else {
-            res.status(400).json({ error: 'Incorrect Password' })
+            res.status(400).json({ error: 'Incorrect Password' });
         };
     });
 });

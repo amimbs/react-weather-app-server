@@ -5,3 +5,6 @@
 - ~~after consideration switched back to openweatherapi~~
 - ~~add JWT for user authorization~~
 - how to create authorized protected routes only for the user?
+- store favorites in the backend
+- when a person logs in frontend should do a check for their favorites
+- front end should store userid, store a city as default, reponse should have userid and default locaiton
