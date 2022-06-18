@@ -7,7 +7,7 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken')
 const tokenSecret = process.env.JWT_SECRET;
 
-router.post('/', (req, res) => {
+router.post('/register', (req, res) => {
     const { firstName, lastName, email, userName, password } = req.body;
     if (!email || !password || !firstName || !lastName || !userName) {
         return res.status(400).json({ error: 'All fields are required' });
@@ -28,14 +28,13 @@ router.post('/', (req, res) => {
                 e.errors.forEach(error => {
                     errors.push(error.message);
                 });
-            }
+            };
             return res.status(400).json({ error: errors });
         });
     });
 });
 
 router.post('/login', async (req, res) => {
-    console.log('hello world')
     const { userName, password } = req.body;
     const foundUser = await models.User.findOne({ where: { userName: userName }, raw: true });
     if (!foundUser) {
@@ -51,13 +50,25 @@ router.post('/login', async (req, res) => {
                 username: foundUser.username,
                 firstName: foundUser.firstName,
                 email: foundUser.email,
-                id: foundUser.id
+                id: foundUser.id,
+                defaultCity: foundUser.defaultCity
             };
             res.status(200).json({ auth: true, token: token, foundUser: responseUser });
         } else {
             res.status(400).json({ error: 'Incorrect Password' });
         };
     });
+});
+
+router.post('/set-default', async (req, res) => {
+    console.log(req.body)
+    const { defaultCity, userId } = req.body;
+    await models.User.update({ defaultCity: defaultCity }, {
+        where: {
+            id: userId
+        }
+    });
+    res.status(200).json({ succes: true });
 });
 
 module.exports = router;

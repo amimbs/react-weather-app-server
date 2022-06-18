@@ -15,14 +15,13 @@ app.use(express.json());
 app.use(
     cors({
         origin: ["http://localhost:3000"],
-        methods: ["GET", "POST"],
-        credentials: true
+        methods: ["GET", "POST"]
     })
 );
 
 // routers
 const usersRouter = require('./routes/Users.js');
-app.use('/register', usersRouter)
+app.use('/users', usersRouter)
 
 
 app.listen(PORT, () => {
