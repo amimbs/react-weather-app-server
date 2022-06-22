@@ -43,9 +43,6 @@ router.post('/login', async (req, res) => {
     bcyrpt.compare(password, foundUser.password, (err, match) => {
         if (match) {
             const id = foundUser.id;
-            const token = jwt.sign({ id }, tokenSecret, {
-                expiresIn: 300,
-            });
             let responseUser = {
                 username: foundUser.username,
                 firstName: foundUser.firstName,
@@ -53,7 +50,7 @@ router.post('/login', async (req, res) => {
                 id: foundUser.id,
                 defaultCity: foundUser.defaultCity
             };
-            res.status(200).json({ auth: true, token: token, foundUser: responseUser });
+            res.status(200).json({ foundUser: responseUser });
         } else {
             res.status(400).json({ error: 'Incorrect Password' });
         };
