@@ -4,7 +4,6 @@ const models = require('../models');
 const user = require('../models/user')
 const bcyrpt = require('bcrypt');
 const saltRounds = 10;
-const jwt = require('jsonwebtoken')
 const tokenSecret = process.env.JWT_SECRET;
 
 router.post('/register', (req, res) => {
