@@ -13,7 +13,11 @@ require ('dotenv').config();
 
 app.use(express.json());
 app.use(
-    cors()
+    cors({
+        origin: "*",
+        methods: ["GET", "POST", "OPTIONS"],
+        credentials: true
+    })
 );
 
 // routers
