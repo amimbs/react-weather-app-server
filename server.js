@@ -13,10 +13,7 @@ require ('dotenv').config();
 
 app.use(express.json());
 app.use(
-    cors({
-        origin: ["https://myweatha.netlify.app/"],
-        methods: ["GET", "POST", "OPTIONS"]
-    })
+    cors()
 );
 
 // routers
