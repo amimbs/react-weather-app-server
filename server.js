@@ -17,6 +17,8 @@ app.all('*', function(req, res, next) {
     next();
 });
 
+app.options('*', cors()) 
+
 // in package.json change the main to the server and add the nodemon script
 app.use(express.json());
 const models = require('./models');
