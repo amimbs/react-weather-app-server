@@ -1,9 +1,19 @@
 const express = require('express');
+const cors = require('cors');
 const router = express.Router();
 const models = require('../models');
 const user = require('../models/user')
 const bcyrpt = require('bcrypt');
 const saltRounds = 10;
+
+router
+    .use(cors({
+      origin: [
+        '*',
+      ],
+      methods: ['GET', 'POST'],
+      allowedHeaders: ['Content-Type', 'Authorization']
+    }))
 
 router.post('/register', (req, res) => {
     const { firstName, lastName, email, userName, password } = req.body;
