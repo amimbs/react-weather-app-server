@@ -12,6 +12,13 @@ app.use(
 
 app.all('*',cors())
 
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    next();
+ }) 
+
 app.options('*', cors()) 
 
 // in package.json change the main to the server and add the nodemon script
