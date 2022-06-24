@@ -14,7 +14,7 @@ require ('dotenv').config();
 app.use(express.json());
 app.use(
     cors({
-        origin: "https://weathaserverreact.herokuapp.com/user/login",
+        origin: "https://weathaserverreact.herokuapp.com/users/login",
         methods: ["GET", "POST", "OPTIONS"],
     })
 );
