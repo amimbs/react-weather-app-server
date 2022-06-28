@@ -1,6 +1,6 @@
 # MyWeatha
 
-![Banner](./src/assets/banner.JPG)
+![Banner](..react-weather-app-frontend/src/assets/banner.JPG)
 
 ## Table of Contents :books:
 * [General Info :information_source:](#general-info)
