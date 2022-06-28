@@ -12,7 +12,7 @@
 ## General Info
 `MyWeatha` is a full stack website that utilizes user authentication and authorization to display the weather forecast of any location selected by the user. The user can even set a location as their default weather forecast.
 
-This is repository is the Server side of the website. The server side can be found [here](https://github.com/amimbs/react-weather-app-client.git).
+This is repository is the Server side of the website. The client side can be found [here](https://github.com/amimbs/react-weather-app-client.git).
 
 ## Local Installation
 1) You will need to install the client and server repositories.
